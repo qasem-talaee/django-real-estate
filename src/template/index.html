@@ -1,0 +1,401 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+    <!-- Hero Section Begin -->
+    <section class="hero-section">
+        <div class="hero-items owl-carousel">
+            {% for i in slider %}
+            <div class="single-hero-item set-bg" data-setbg="{{ i.image1.url }}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2">
+                            <div class="hero-text">
+                                <p class="room-location"><i class="icon_pin"></i> {{ i.address }}</p>
+                                <h2>{{ i.title }}</h2>
+                                <div class="room-price">
+                                    <span>Start Form:</span>
+                                    <p>${{ i.price }}</p>
+                                </div>
+                                <ul class="room-features">
+                                    <li>
+                                        <i class="fa fa-arrows"></i>
+                                        <p>{{ i.home_area }} m2</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-bed"></i>
+                                        <p>{{ i.bed_room }} Bed Room</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-bath"></i>
+                                        <p>{{ i.baths }} Baths Bed</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-car"></i>
+                                        <p>{{ i.garage }} Garage</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="thumbnail-pic">
+            <div class="thumbs owl-carousel">
+                {% for i in slider %}
+                <div class="item">
+                    <img src="{{ i.image1.url }}" alt="">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Search Form Section Begin -->
+    <div class="search-form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <form action="{% url 'search' %}" method="post" class="filter-form">{% csrf_token %}
+                        <div class="first-row">
+                            <select name="status">
+                                <option value="sell">For Sell</option>
+                                <option value="rent">For Rent</option>
+                            </select>
+                            <select name="type" class="form-inline">
+                                {% for i in prop_type %}
+                                <option value="{{ i.id }}">{{ i.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="city" class="form-inline">
+                                {% for i in city %}
+                                <option value="{{ i.id }}">{{ i.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="second-row">
+                            <select name="bed">
+                                <option value="1">1 Bedroom</option>
+                                <option value="2">2 Bedrooms</option>
+                                <option value="3">3 Bedrooms</option>
+                                <option value="4">4 Bedrooms</option>
+                                <option value="5">5 Bedrooms</option>
+                                <option value="6">6 Bedrooms</option>
+                                <option value="7">7 Bedrooms</option>
+                                <option value="8">8 Bedrooms</option>
+                                <option value="9">9 Bedrooms</option>
+                                <option value="10">10 Bedrooms</option>
+                            </select>
+                             <select name="bath">
+                                <option value="1">1 Bithroom</option>
+                                <option value="2">2 Bithrooms</option>
+                                <option value="3">3 Bithrooms</option>
+                                <option value="4">4 Bithrooms</option>
+                                <option value="5">5 Bithrooms</option>
+                                <option value="6">6 Bithrooms</option>
+                                <option value="7">7 Bithrooms</option>
+                                <option value="8">8 Bithrooms</option>
+                                <option value="9">9 Bithrooms</option>
+                                <option value="10">10 Bithrooms</option>
+                            </select>
+                            <div class="price-range-wrap col-6">
+                                <div class="price-text">
+                                    <label for="priceRange">Price:</label>
+                                    <input type="text" id="priceRange" readonly name="price">
+                                </div>
+                                <div id="price-range" class="slider"></div>
+                            </div>
+                            <div class="room-size-range col-6">
+                                <div class="price-text">
+                                    <label for="roomsizeRange">Size:</label>
+                                    <input type="text" id="roomsizeRange" readonly name="area">
+                                </div>
+                                <div id="roomsize-range" class="slider"></div>
+                            </div>
+                        </div>
+                    <div class="form-group">
+                    <br><br><br><br><br><br><br><br><br><br><input type="submit" name="submit" value="Search" class="btn btn-block btn-outline-primary search-btn">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Search Form Section End -->
+
+    <!-- How It Works Section Begin -->
+    <section class="howit-works spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>Find Your Dream House</span>
+                        <h2>How It Work</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="single-howit-works">
+                        <img src="/media/img/howit-works/howit-works-1.png" alt="">
+                        <h4>Search & Find Apertment</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="single-howit-works">
+                        <img src="/media/img/howit-works/howit-works-2.png" alt="">
+                        <h4>Find Your Room</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="single-howit-works">
+                        <img src="/media/img/howit-works/howit-works-3.png" alt="">
+                        <h4>Talk To Agent</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- How It Works Section End -->
+
+    <!-- Feature Section Begin -->
+    <section class="feature-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>Listing From Our Agents</span>
+                        <h2>Featured Properties</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="feature-carousel owl-carousel">
+                    {% for i in recent_property %}
+                    <div class="col-lg-4">
+                        <div class="feature-item">
+                            <div class="fi-pic set-bg" data-setbg="{{ i.image1.url }}">
+                                <div class="pic-tag">
+                                    <div class="f-text">feauture</div>
+                                    <div class="s-text">{{ i.status }}</div>
+                                </div>
+                            </div>
+                            <div class="fi-text">
+                                <div class="inside-text">
+                                    <h4>{{ i.title }}</h4>
+                                    <ul>
+                                        <li><i class="fa fa-map-marker"></i> {{ i.address }}</li>
+                                        <li><i class="fa fa-tag"></i> {{ i.property_type }}</li>
+                                    </ul>
+                                    <h5 class="price">${{ i.price }}<span>/month</span></h5>
+                                </div>
+                                <ul class="room-features">
+                                    <li>
+                                        <i class="fa fa-arrows"></i>
+                                        <p>{{ i.home_area }} m2</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-bed"></i>
+                                        <p>{{ i.bed_room }}</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-bath"></i>
+                                        <p>{{ i.baths }}</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-car"></i>
+                                        <p>{{ i.garage }}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Feature Section End -->
+
+    <!-- Video Section Begin -->
+    <div class="video-section set-bg" data-setbg="/media/img/video-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="video-text">
+                        <a href="https://www.youtube.com/watch?v=EzKkl64rRbM" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                        <h4>Find The Perfect</h4>
+                        <h2>Real Estate Agent Near You</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Video Section End -->
+
+    <!-- Top Properties Section Begin -->
+    <div class="top-properties-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="properties-title">
+                        <div class="section-title">
+                            <span>Top Property For You</span>
+                            <h2>Top Properties</h2>
+                        </div>
+                        <a href="{% url 'property' %}" class="top-property-all">View All Property</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="top-properties-carousel owl-carousel">
+                {% for i in top %}
+                <div class="single-top-properties">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="stp-pic">
+                                <img src="{{ i.image1.url }}" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="stp-text">
+                                <div class="s-text">{{ i.status }}</div>
+                                <h2>{{ i.title }}</h2>
+                                <div class="room-price">
+                                    <span>Start From:</span>
+                                    <h4>${{ i.price }}</h4>
+                                </div>
+                                <div class="properties-location"><i class="icon_pin"></i> {{ i.address }}</div>
+                                <ul class="room-features">
+                                    <li>
+                                        <i class="fa fa-arrows"></i>
+                                        <p>{{ i.home_area }} m2</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-bed"></i>
+                                        <p>{{ i.bed_room }} Bed Room</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-bath"></i>
+                                        <p>{{ i.baths }} Baths Bed</p>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-car"></i>
+                                        <p>{{ i.garage }} Garage</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Top Properties Section End -->
+
+    <!-- Agent Section Begin -->
+    <section class="agent-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>We Are To Help You</span>
+                        <h2>Our Agents</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="agent-carousel owl-carousel">
+                    {% for i in agent %}
+                    <div class="col-lg-3">
+                        <div class="single-agent">
+                            <div class="sa-pic">
+                                <img src="{{ i.image.url }}" alt="">
+                            </div>
+                            <h5>{{ i.name }} <span>{{ i.job }}</span></h5>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Agent Section End -->
+
+    <!-- Latest Blog Section Begin -->
+    <section class="blog-section latest-blog spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>Blog & Events</span>
+                        <h2>News Latest</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for i in blog %}
+                <div class="col-lg-4">
+                    <div class="single-blog-item">
+                        <div class="sb-pic">
+                            <img src="{{ i.image.url }}" alt="">
+                        </div>
+                        <div class="sb-text">
+                            <ul>
+                                <li><i class="fa fa-user"></i> {{ i.writer }}</li>
+                                <li><i class="fa fa-clock-o"></i> {{ i.date }}</li>
+                            </ul>
+                            <h4><a href="{% url 'blog_detail' i.url %}">{{ i.title }}</a></h4>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Latest Blog Section End -->
+
+    <!-- Partner Carousel Section Begin -->
+    <div class="partner-section">
+        <div class="container">
+            <div class="partner-carousel owl-carousel">
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-1.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-2.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-3.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-4.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-5.png" alt="">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Partner Carousel Section End -->
+
+{% endblock %}

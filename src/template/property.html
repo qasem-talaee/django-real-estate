@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Property{% endblock %}
+{% block content %}
+    <!-- Map Section Begin -->
+    <div class="map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2942.5524090066037!2d-71.10245469994108!3d42.47980730490846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e3748250c43a43%3A0xe1b9879a5e9b6657!2sWinter%20Street%20Public%20Parking%20Lot!5e0!3m2!1sen!2sbd!4v1577299251173!5m2!1sen!2sbd"
+            height="500" style="border:0;" allowfullscreen=""></iframe>
+        <div class="icon-list">
+            <div class="icon icon-1">
+                1
+            </div>
+            <div class="icon icon-2">
+                2
+            </div>
+            <div class="icon icon-3">
+                3
+            </div>
+            <div class="icon icon-4">
+                4
+            </div>
+            <div class="icon icon-5">
+                5
+            </div>
+        </div>
+    </div>
+    <!-- Map Section End -->
+
+    <!-- Property Section Begin -->
+    <section class="property-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="property-sidebar">
+                        <h4>Search Property</h4>
+                        <form action="{% url 'search' %}" class="sidebar-search" method="post">{% csrf_token %}
+                             <select name="status">
+                                <option value="sell">For Sell</option>
+                                <option value="rent">For Rent</option>
+                            </select>
+                            <select name="type" class="form-inline">
+                                {% for i in prop_type %}
+                                <option value="{{ i.id }}">{{ i.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="city" class="form-inline">
+                                {% for i in city %}
+                                <option value="{{ i.id }}">{{ i.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="bed">
+                                <option value="1">1 Bedroom</option>
+                                <option value="2">2 Bedrooms</option>
+                                <option value="3">3 Bedrooms</option>
+                                <option value="4">4 Bedrooms</option>
+                                <option value="5">5 Bedrooms</option>
+                                <option value="6">6 Bedrooms</option>
+                                <option value="7">7 Bedrooms</option>
+                                <option value="8">8 Bedrooms</option>
+                                <option value="9">9 Bedrooms</option>
+                                <option value="10">10 Bedrooms</option>
+                            </select>
+                             <select name="bath">
+                                <option value="1">1 Bithroom</option>
+                                <option value="2">2 Bithrooms</option>
+                                <option value="3">3 Bithrooms</option>
+                                <option value="4">4 Bithrooms</option>
+                                <option value="5">5 Bithrooms</option>
+                                <option value="6">6 Bithrooms</option>
+                                <option value="7">7 Bithrooms</option>
+                                <option value="8">8 Bithrooms</option>
+                                <option value="9">9 Bithrooms</option>
+                                <option value="10">10 Bithrooms</option>
+                            </select>
+                            <div class="room-size-range">
+                                <div class="price-text">
+                                    <label for="roomsizeRangeP">Size:</label>
+                                    <input type="text" id="roomsizeRangeP" readonly name="area">
+                                </div>
+                                <div id="roomsize-range-P" class="slider"></div>
+                            </div>
+                            <div class="price-range-wrap">
+                                <div class="price-text">
+                                    <label for="priceRangeP">Price:</label>
+                                    <input type="text" id="priceRangeP" readonly name="price">
+                                </div>
+                                <div id="price-range-P" class="slider"></div>
+                            </div>
+                            <input type="submit" name="submit" value="Search" class="search-btn btn btn-outline-primary btn-block">
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <h4 class="property-title">Property</h4>
+                    <div class="property-list">
+                        {% for i in prop %}
+                        <div class="single-property-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="property-pic">
+                                        <img src="{{ i.image1.url }}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="property-text">
+                                        <div class="s-text">{{ i.status }}</div>
+                                        <h5 class="r-title">{{ i.title }}</h5>
+                                        <div class="room-price">
+                                            <span>Start From:</span>
+                                            <h5>${{ i.price }}</h5>
+                                        </div>
+                                        <div class="properties-location"><i class="icon_pin"></i> {{ i.address }}</div>
+                                        <ul class="room-features">
+                                            <li>
+                                                <i class="fa fa-arrows"></i>
+                                                <p>{{ i.home_area }} m2</p>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-bed"></i>
+                                                <p>{{ i.bed_room }} Bed Room</p>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-bath"></i>
+                                                <p>{{ i.baths }} Baths Bed</p>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-car"></i>
+                                                <p>{{ i.garage }} Garage</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        <br><a class="btn btn-block btn-outline-info" href="{% url 'property_detail' i.id %}">READ MORE</a><br>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="property-pagination">
+                        {% for i in count_page %}
+                            <a {% ifnotequal page forloop.counter %} href="{% url 'property_page' forloop.counter %}" {% endifnotequal %}>{{ forloop.counter }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Property Section End -->
+
+    <!-- Partner Carousel Section Begin -->
+    <div class="partner-section">
+        <div class="container">
+            <div class="partner-carousel owl-carousel">
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-1.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-2.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-3.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-4.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-5.png" alt="">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Partner Carousel Section End -->
+
+{% endblock %}

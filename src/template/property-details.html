@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Property{% endblock %}
+{% block content %}
+
+    <!-- Property Details Hero Section Begin -->
+    {% for i in prop %}
+    <section class="pd-hero-section set-bg" data-setbg="/media/img/properties/product-content-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="pd-hero-text">
+                        <p class="room-location"><i class="icon_pin"></i> {{ i.address }}</p>
+                        <h2>{{ i.title }}</h2>
+                        <div class="room-price">
+                            <span>Start Form:</span>
+                            <p>${{ i.price }}</p>
+                        </div>
+                        <ul class="room-features">
+                            <li>
+                                <i class="fa fa-arrows"></i>
+                                <p>{{ i.home_area }} m2</p>
+                            </li>
+                            <li>
+                                <i class="fa fa-bed"></i>
+                                <p>{{ i.bed_room }} Bed Room</p>
+                            </li>
+                            <li>
+                                <i class="fa fa-bath"></i>
+                                <p>{{ i.baths }} Baths Bed</p>
+                            </li>
+                            <li>
+                                <i class="fa fa-car"></i>
+                                <p>{{ i.garage }} Garage</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Property Details Hero Section Begin -->
+
+    <!-- Property Details Section Begin -->
+    <section class="property-details-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="pd-details-text">
+                        <div class="pd-details-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-send"></i></a>
+                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#"><i class="fa fa-print"></i></a>
+                            <a href="#"><i class="fa fa-cloud-download"></i></a>
+                        </div>
+                        <div class="property-more-pic">
+                            <div class="product-pic-zoom">
+                                <img class="product-big-img" src="{{ i.image1.url }}" alt="">
+                            </div>
+                            <div class="product-thumbs">
+                                <div class="product-thumbs-track ps-slider owl-carousel">
+                                    <div class="pt" data-imgbigurl="{{ i.image2.url }}"><img
+                                            src="{{ i.image2.url }}" alt=""></div>
+                                    <div class="pt active" data-imgbigurl="{{ i.image1.url }}"><img
+                                            src="{{ i.image1.url }}" alt=""></div>
+                                    <div class="pt" data-imgbigurl="{{ i.image3.url }}"><img
+                                            src="{{ i.image3.url }}" alt=""></div>
+                                    <div class="pt" data-imgbigurl="{{ i.image4.url }}"><img
+                                            src="{{ i.image4.url }}" alt=""></div>
+                                    <div class="pt" data-imgbigurl="{{ i.image5.url }}"><img
+                                            src="{{ i.image5.url }}" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pd-details-tab">
+                            <div class="tab-item">
+                                <ul class="nav" role="tablist">
+                                    <li>
+                                        <a class="active" data-toggle="tab" href="#tab-1" role="tab">Overview</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-item-content">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade-in active" id="tab-1" role="tabpanel">
+                                        <div class="property-more-table">
+                                            <table class="left-table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="pt-name">Price</td>
+                                                        <td class="p-value">$ {{ i.price }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pt-name">City</td>
+                                                        <td class="p-value">{{ i.city }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pt-name">Property Type</td>
+                                                        <td class="p-value">{{ i.property_type }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pt-name">Year Built</td>
+                                                        <td class="p-value">{{ i.year_build }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pt-name">Bathrooms</td>
+                                                        <td class="p-value">{{ i.baths }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pt-name">Rooms</td>
+                                                        <td class="p-value">{{ i.bed_room }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="right-table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="pt-name">Agent</td>
+                                                        <td class="p-value">{{ i.agent }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pt-name">Contract type</td>
+                                                        <td class="p-value">{{ i.status }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pt-name">Beds</td>
+                                                        <td class="p-value">{{ i.bed_rrom }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pt-name">Garages</td>
+                                                        <td class="p-value">{{ i.garage }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pt-name">Home area</td>
+                                                        <td class="p-value">{{ i.home_area }} m2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pt-name">Gara Size</td>
+                                                        <td class="p-value">{{ i.garage_area }} m2</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="pd-desc">
+                                        <h4>Description</h4>
+                                        {{ i.description|safe }}
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="property-contactus">
+                            <h4>Contact Us</h4>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    {% for j in agent %}
+                                    <div class="agent-desc">
+                                        <img src="{{ j.image.url }}" alt="">
+                                        <div class="agent-title">
+                                            <h5>{{ j.name }}</h5>
+                                            <span>{{ j.job }}</span>
+                                        </div>
+                                        <p>{{ j.description }}{{ j.id }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 offset-lg-1">
+                                    <form action="{% url 'agent_contact' j.id i.id %}" class="agent-contact-form" method="post">{% csrf_token %}
+                                        <input name="name" type="text" placeholder="Name*" required>
+                                        <input name="email" type="text" placeholder="Email*" required>
+                                        <input name="phone" type="text" placeholder="Phone*" required>
+                                        <input type="submit" class="site-btn btn btn-primary" name="submit" value="Send Request">
+                                    </form>
+                                </div>
+                                    {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+                <div class="col-lg-3">
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Property Details Section End -->
+
+    <!-- Partner Carousel Section Begin -->
+    <div class="partner-section">
+        <div class="container">
+            <div class="partner-carousel owl-carousel">
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-1.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-2.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-3.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-4.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-5.png" alt="">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Partner Carousel Section End -->
+
+{% endblock %}

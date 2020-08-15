@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Blog{% endblock %}
+{% block content %}
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>Blog List</h2>
+                        <div class="breadcrumb-option">
+                            <a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a>
+                            <span>Blog Default</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section Begin -->
+
+    <!-- Blog Section Begin -->
+    <section class="blog-section blog-page spad">
+        <div class="container">
+            <div class="row">
+                {% for i in blog %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-blog-item">
+                        <div class="sb-pic">
+                            <img src="{{ i.image.url }}" alt="">
+                        </div>
+                        <div class="sb-text">
+                            <ul>
+                                <li><i class="fa fa-user"></i> {{ i.writer }}</li>
+                                <li><i class="fa fa-clock-o"></i> {{ i.date }}</li>
+                            </ul>
+                            <h4><a href="{% url 'blog_detail' i.url %}">{{ i.title }}</a></h4>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="col-lg-12">
+                    <div class="property-pagination">
+                        {% for i in count_page %}
+                            <a {% ifnotequal page forloop.counter %} href="{% url 'blog_page' forloop.counter %}" {% endifnotequal %}>{{ forloop.counter }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+    <!-- Partner Carousel Section Begin -->
+    <div class="partner-section">
+        <div class="container">
+            <div class="partner-carousel owl-carousel">
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-1.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-2.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-3.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-4.png" alt="">
+                    </div>
+                </a>
+                <a href="#" class="partner-logo">
+                    <div class="partner-logo-tablecell">
+                        <img src="/media/img/partner/partner-5.png" alt="">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Partner Carousel Section End -->
+
+{% endblock %}
